@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>语法</title>
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+</head>
+<body>
+
+<!--2.view层 模板-->
+<div id="app1">
+
+    <!--   v-bind:名字  //绑定数据层-->
+    <span v-bind:title="message"> 学习VUE语法页面</span>
+
+</div>
+<script>
+    <!--    3.model层 数据-->
+    let vm = new Vue({
+        el: "#app1",
+        data: {
+            message: "hello,vue324124"
+        }
+    });
+</script>
+
+</body>
+</html>
