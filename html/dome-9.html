@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+
+    <!--在线CDN-->
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+
+
+</head>
+<body>
+
+<div id="app">
+    <p>{{ message }}</p>
+
+    <p>{{ timestamp() }}</p>
+
+    <!-- 开启了计算属性的-->
+    <h1>{{ timestamp1 }}</h1>
+
+
+</div>
+
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            message: "hello word!",
+            test: "helloLeslie",
+        },
+        methods: {
+            //这个是方法  timestamp是时间戳
+            timestamp: function () {
+                return Date.now();
+            }
+        },
+
+        //computed是计算属性，里面也是写方法的 和methods里面的方法名不能重名
+        computed: {
+            //计算属性就是会拥有缓存功能，然后如果重新更新计算后就会重新缓存
+            timestamp1: function () {
+                this.test;//调用这个属性
+                return Date.now();
+            }
+        },
+    });
+</script>
+</body>
+</html>

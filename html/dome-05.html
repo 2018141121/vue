@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件绑定</title>
+
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+</head>
+<body>
+
+<!--1.view层 模板-->
+<div id="app1">
+
+    <!-- v-on:click 绑定点击事件   v-bind:是绑定参数-->
+    <button v-on:click="HiLeslie">点击</button>
+    <span v-bind:title="message">点击输出提示信息</span>
+
+    <!--    条件-->
+    <p v-if="seen" class="">seen me now</p>
+
+
+</div>
+<script>
+    <!--2.model层 数据-->
+    let vm = new Vue({
+            el: "#app1",
+            data: {
+                message: "helloLeslie事件绑定测试" + new Date().toISOString(),
+                seen: true,
+            },
+            //添加一个方法，通过点击事件触发他
+            methods: {
+                HiLeslie: function () {
+                    alert(this.message);
+                },
+
+            }
+        })
+    ;
+</script>
+
+</body>
+</html>

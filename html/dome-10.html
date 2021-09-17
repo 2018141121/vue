@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽</title>
+    <!--在线CDN-->
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <!--导入axios-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+    <!--3.第三步，前端调用中间件，然后输出相关的数据    -->
+
+    <!-- 1.没有使用插槽的方式遍历-->
+    <p>{{ info.title }}</p>
+
+    <ul v-for="book in info.books">
+        <li>{{ book.name }}</li>
+    </ul>
+
+
+    <!-- 2.使用插槽的方式-->
+    <h1>使用自定义插槽的方式</h1>
+    <ljq>
+        <ljq1 slot="ljq1" v-bind:title="info.title"></ljq1>
+        <ljq2 slot="ljq2" v-for="book in info.books" v-bind:book="book"></ljq2>
+    </ljq>
+</div>
+
+<script>
+    //插槽  要取名字，然后配置模板
+    Vue.component("ljq", {
+
+        //定义一个插槽，用来当模板
+        template: '<div>\
+                <slot name="ljq1"></slot>\
+                <ul>\
+                <li>\
+                <slot name="ljq2"></slot>\
+                </li>\
+                </ul>\
+                <div>'
+    });
+
+    //创建组件1
+    Vue.component("ljq1", {
+        props: ['title'],//属性
+        template: '<div>{{title}}</div>'
+    });
+
+    //创建组件2
+    Vue.component("ljq2", {
+        props: ['book'],
+        template: '<li>{{book.name}}</li>'
+
+    });
+
+
+    let vm = new Vue({
+        el: "#app",
+        // //和data: 不同 属性：vm   这是属性
+
+        //这是方法
+        // 2.第二步，把后台的数据放进中间件vm里面，然后再通过前端调用再传值
+        data() {
+            //返回值
+            return {
+                info: {
+                    // title: null,
+                    // books: [
+                    //     {
+                    //         name: null,
+                    //     }
+                    // ]
+                },
+
+            }
+        },
+
+        mounted() {
+            //钩子函数 链式编程 ES6新特性
+            // 1.第一步，获取后台数据，这里是使用json来存值，也就是获得json里面的数据 然后想办法渲染到前端就ok了
+            axios.get("data.json").then(response => (this.info = response.data));
+        }
+    });
+</script>
+</body>
+</html>

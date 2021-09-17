@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件创建</title>
+
+    <!--1.导入vue.js-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+</head>
+<body>
+
+<div id="app">
+
+    <!-- 后台items的值遍历传递给item，item绑定test1把值传递给test1，再通过自定义模板输出-->
+    <ljq v-for="item in items" v-bind:test1="item"></ljq>
+    {{ data1.a }}
+</div>
+
+<script>
+
+    //定义一个名字为ljq的vue组件
+    Vue.component("ljq", {
+
+        //自定义一个属性
+        props: ['test1'],
+
+        //自定义模板
+        template: '<h1>{{test1}}</h1>',
+    });
+    var data1 = {a: 2}
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            data1: {a: 1},
+            items: ["Java", "Linux", "前端"],
+        },
+    });
+</script>
+</body>
+</html>
+

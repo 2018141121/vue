@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内容分发</title>
+
+    <!--在线CDN-->
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <!--导入axios  异步处理-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <!--3.第三步，前端调用中间件，然后输出相关的数据    -->
+
+
+    <!--    &lt;!&ndash;    //1.没有使用插槽的方式遍历&ndash;&gt;-->
+    <!--    <p>{{info.title}}</p>-->
+    <!--    <ul v-for="book in info.books">-->
+    <!--        <li>{{book.name}}</li>-->
+    <!--    </ul>-->
+
+
+    <!--    2.使用插槽的方式-->
+    <ljq>
+        <!--        @ ==v-on: 事件   : ==v-bind:  绑定 -->
+        <ljq1 slot="ljq1" v-bind:title="info.title"></ljq1>
+
+        <!--循环输出json里面的数据（也就是实例里面的数据），然后把数据放进一个对象里面（现在就是把数据放进前端页面里面），
+        然后通过绑定一些组件，就可以把数据传进组件里面（也就是组件通过前端的中间件拿到数据），
+        也可以自定义一个事件触发一些动作，进行改动数据（下面的remove就是自定义事件）-->
+        <ljq2 slot="ljq2" v-for="(book,index) in info.books" v-bind:book="book" :index="index"
+              @remove="removeBook"></ljq2>
+    </ljq>
+</div>
+
+<script>
+
+    //插槽  要取名字，然后配置模板
+    Vue.component("ljq", {
+        //定义一个插槽，用来当模板
+        template: '<div>\
+                <slot name="ljq1"></slot>\
+                <ul>\
+                <slot name="ljq2"></slot>\
+                </ul>\
+                <div>'
+    });
+
+    //组件1
+    Vue.component("ljq1", {
+        props: ['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    //组件2
+    Vue.component("ljq2", {
+
+        //道具，拿到前端绑定的值
+        props: ['book', 'index'],
+        //只能调用当前的方法
+        template: '<li>{{index}}----{{book.name}} <button @click="remove">删除</button></li>',
+
+        methods: {
+            remove: function (index) {
+                alert("删除数据！");
+
+                // vm.removeBook(index);  //1.这是一种方法，直接调用实例里面的方法，直接删除
+
+                //2.自定义事件分发 // this.$emit('自定义事件',参数) 自定义事件分发（远程调用方法）  $emit发射
+                this.$emit('remove', index);
+            }
+        }
+    });
+
+
+    //实例
+    let vm = new Vue({
+        el: "#app",
+        // //和data: 不同 属性：vm   这是属性
+        //这是方法 2.第二步，把后台的数据放进中间件vm里面，然后再通过前端调用再传值
+        data() {
+            //返回值
+            return {
+                info: {
+                    title: null,
+                    books: [
+                        {
+                            name: null,
+                        }
+                    ]
+                },
+
+            }
+        },
+        methods: {
+            removeBook: function (index) {
+                //只要执行了这个方法，就会删除这个元素
+                // splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目，其中 index 为添加/删除项目的位置，1 表示删除的数量
+                this.info.books.splice(index, 1);
+
+            }
+        },
+
+        //安装
+        mounted() {
+            //钩子函数 链式编程 ES6新特性
+            // 1.第一步，获取后台数据，这里是使用json来存值，也就是获得json里面的数据 然后想办法渲染到前端就ok了
+            axios.get("data.json").then(response => (this.info = response.data));
+        }
+    });
+</script>
+</body>
+</html>

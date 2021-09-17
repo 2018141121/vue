@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定</title>
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+</head>
+<body>
+
+<!--1.view层 模板-->
+<div id="app1">
+    <label>性别：</label>
+    <!--    v-model   数据双向绑定-->
+    <input type="radio" name="sex" value="男" v-model="sex"> 男
+    <input type="radio" name="sex" value="女" v-model="sex">女
+
+    <hr></hr>
+    <!--  输出data里面的sex值 ，因为用v-model双向绑定了sex-->
+    选中了谁：{{ sex }}
+
+    <hr>
+    多选框：
+    <input type="checkbox" name="type" value="足球" v-model="qiu">足球
+    <input type="checkbox" name="type" value="篮球" v-model="qiu">篮球
+    <input type="checkbox" name="type" value="排球" v-model="qiu">排球
+    <input type="checkbox" name="type" value="羽毛球" v-model="qiu">羽毛球
+    <hr>
+    选中了谁：{{ qiu }}
+
+    <hr></hr>
+    <br>
+
+    <label>
+        <!-- 下拉框双向绑定自定义的属性-->
+        <label>下拉框：</label>
+        <select v-model="selected">
+            <!-- 先把列表的数据遍历出来，然后进行选项绑定,把数据返回给selected-->
+            <option v-for="option in optionsList" v-bind:value="option.value">{{ option.key }}</option>
+        </select>
+    </label>
+
+    <!--输出选择的的数据-->
+    <div id="output">
+        选择的网站是: {{ selected }}
+    </div>
+
+</div>
+
+<script>
+    <!-- 2.model层 数据-->
+    let vm = new Vue({
+                el: "#app1",//绑定页面
+                data: {
+                    message: "",
+                    sex: "",
+                    qiu: [],
+
+                    //选项列表
+                    optionsList:
+                        [{key: '选择', value: 'Select'},
+                            {key: '淘宝', value: 'taobao'},
+                            {key: '京东', value: 'jingd'},
+                            {key: '阿里巴巴', value: 'alibaba'},
+                            {key: '亚马逊', value: 'amazon'},
+                            {key: '苏宁', value: 'suning'},
+                            {key: '拼多多', value: 'pinduoduo'}],
+
+                    selected: 'Select',
+
+                }
+            }
+        )
+    ;
+</script>
+
+</body>
+</html>

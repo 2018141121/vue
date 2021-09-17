@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽2</title>
+
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <!--导入axios-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" v-bind:title="info.title"></todo-title>
+        <todo-items slot="todo-items" v-for="item in info.books" v-bind:item="item"></todo-items>
+    </todo>
+
+    <!--插槽的功能就大概是这样子，把标签都整合到组件里面-->
+    <ul>
+        <li v-for="item in info.books" v-bind:itemid="item">
+            <div>
+                {{ item.title }}
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script>
+
+    //slot 插槽 这个组件要定义在前面不然出不来数据
+    Vue.component("todo", {
+        template: '<div>\
+                <slot name="todo-title"></slot>\
+                <ul>\
+                <slot name="todo-items"></slot>\
+                </ul>\
+                <div>'
+    });
+
+    Vue.component("todo-title", {
+        //属性
+        props: ['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    Vue.component("todo-items", {
+        props: ['item'],
+        template: '<li>{{item.name}}</li>'
+    });
+
+    var vm = new Vue({
+        el: "#app",
+        // data: {
+        //     //标题
+        //     title: "图书馆系列图书",
+        //     //列表
+        //     todoItems: ['三国演义', '红楼梦', '西游记', '水浒传']
+        // },
+
+        data() {
+            //返回值
+            return {
+                info: {},
+
+            }
+        },
+
+        mounted() {
+            //钩子函数 链式编程 ES6新特性    1.第一步，获取后台数据，这里是使用json来存值，也就是获得json里面的数据 然后想办法渲染到前端就ok了
+            axios.get("data.json").then(response => (this.info = response.data));//也就是把数据放进info里面
+        }
+    });
+</script>
+</body>
+</html>

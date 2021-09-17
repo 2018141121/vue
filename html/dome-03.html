@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>语法if-else</title>
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+</head>
+<body>
+
+<!--2.view层 模板-->
+<div id="app1">
+    <!--    <p v-if="ok">yes</p>-->
+    <!--    <p v-else>no</p>-->
+
+    <!-- 条件判断语句后的判断-->
+    <p v-if="type === 1">数据就是1</p>
+    <p v-else-if="type === 2">数据是2</p>
+    <p v-else-if="type === 3">数据是3</p>
+    <p v-else>没有这个数据</p>
+    <h1 v-if="type === 1">练习1</h1>
+</div>
+
+<script>
+    <!--3.model层 数据-->
+    let vm = new Vue({
+        el: "#app1",
+        data: {
+            type: 1,
+        }
+    });
+</script>
+
+</body>
+</html>

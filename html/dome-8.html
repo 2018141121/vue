@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AXios异步通信</title>
+
+    <!--在线CDN-->
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <!--2.导入axios-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+
+    <!--3.第三步，前端调用中间件，然后输出相关的数据    -->
+    <div>{{ info.name }}</div>
+    <!--    <span>{{info.}}</span>-->
+
+    <a v-bind:href="info.url">点我到百度链接</a>
+    <br>
+    <div>{{ info.title1 }}</div>
+    <ul>
+        <li v-for="link in info.links"> 名称：{{ link.name }}
+            <a v-bind:href="link.url">跳转地址</a>
+        </li>
+    </ul>
+    <p>输出json里面存的对象</p>
+    <p>名字：{{ info.address.street }}</p>
+    <p>城市：{{ info.address.city }}</p>
+    <p>地点：{{ info.address.country }}</p>
+
+</div>
+
+<script>
+    let vm = new Vue({
+        el: "#app",
+        //和data: 不同 属性：vm   这是属性
+        // data: {},
+
+        //这是方法data()
+        // 2.第二步，把后台的数据放进中间件vm里面，然后再通过前端调用再传值
+        data() {
+            //返回值
+            return {
+                info: {
+                    //下面的这些都可以不用进行配置
+                    // name: null,
+                    // url: null,
+                    // title1: null,
+                    // address: {
+                    //     street: null, city: null, country: null,
+                    // },
+                    // links: [
+                    //     {name: null, url: null,}
+                    // ]
+                },
+
+            }
+        },
+
+        mounted() {
+            //钩子函数 链式编程 ES6新特性  已安装
+
+            // 1.第一步，获取后台数据，这里是使用json来存值
+            // 也就是获得json里面的数据,然后想办法渲染到前端就ok了
+            axios.get("data.json").then(response => (this.info = response.data));
+        }
+    });
+</script>
+</body>
+</html>

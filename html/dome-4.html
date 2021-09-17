@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for循环</title>
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+</head>
+<body>
+
+<!--1.view层 模板-->
+<div id="app1">
+    <ul>
+        <!-- 也就是把对象遍历出来，然后通过term来接收-->
+        <li v-for="term in items">
+            <h1>{{ term.message }} 他的id为：{{ term.id }}+他的年龄为：{{ term.age }}</h1>
+            <hr></hr>
+        </li>
+    </ul>
+
+
+</div>
+
+<script>
+    <!--2. model层 数据-->
+    let vm = new Vue({
+            // 相当于映射的关系，也就是通过这个找到相对应的页面模板  [找页面模板，存放下面的数据]
+            el: "#app1",
+            //数据对象
+            data: {
+                //数组  【data里面存放数组】
+                items: [
+                    //对象
+                    {message: "leslie1测试1", id: 1, age: 18, say: "yes"},
+                    {message: "leslie2测试2", id: 2, age: 89, say: "yes"},
+                ]
+            }
+        })
+    ;
+</script>
+
+</body>
+</html>
