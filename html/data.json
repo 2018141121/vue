@@ -1,0 +1,41 @@
+{
+  "title": "书籍列表",
+  "name": "靓仔啊",
+  "age": "18",
+  "sex": "男",
+  "url": "https://www.baidu.com",
+  "title1": "链接列表 ",
+  "address": {
+    "street": "缇香郡",
+    "city": "宁波",
+    "country": "中国"
+  },
+  "links": [
+    {
+      "name": "bilibili",
+      "url": "https://www.bilibili.com"
+    },
+    {
+      "name": "baidu",
+      "url": "https://www.baidu.com"
+    },
+    {
+      "name": "cqh video",
+      "url": "https://www.4399.com"
+    }
+  ],
+  "books": [
+    {
+      "title": "123",
+      "name": "java"
+    },
+    {
+      "title": "1234",
+      "name": "spring"
+    },
+    {
+      "title": "12343452",
+      "name": "springboot"
+    }
+  ]
+}
