@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="Centen">
+    <div id="app">
+
+        <!--	<p>{{message}}</p>
+    <p>{{joke}}</p>
+  -->
+        <textarea id="test">{{joke}}</textarea><br/>
+        <input type="button" value="获取笑话" v-on:click="getJock"></input>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "下面给大家带来一个笑话",
+            joke: "笑话内容"
+        },
+        methods: {
+            getJock: function () {
+                var that = this;
+                //"http://v.juhe.cn/joke/content/text.php?page=1&pagesize=1&key=0ebeff61481c18b6198852d985031731"
+                //从连接里面获取数据
+                axios.get("https://autumnfish.cn/api/joke").then(function (response) {
+                    console.log(response.data);
+                    console.log(this.joke);
+                    //返回给data变量
+                    that.joke = response.data;
+                }, function (err) {
+                })
+            }
+        }
+    });
+</script>
+</body>
+
+</html>

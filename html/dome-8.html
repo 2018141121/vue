@@ -12,7 +12,7 @@
 
 </head>
 <body>
-
+<!--通过id绑定一个vue，也就是一个中间件-->
 <div id="app">
 
     <!--3.第三步，前端调用中间件，然后输出相关的数据    -->
@@ -21,6 +21,9 @@
 
     <a v-bind:href="info.url">点我到百度链接</a>
     <br>
+   <div >
+       {{info.url}}
+   </div>
     <div>{{ info.title1 }}</div>
     <ul>
         <li v-for="link in info.links"> 名称：{{ link.name }}
@@ -45,6 +48,7 @@
         data() {
             //返回值
             return {
+                //一个信息集合
                 info: {
                     //下面的这些都可以不用进行配置
                     // name: null,
@@ -61,11 +65,13 @@
             }
         },
 
+
+        //安装钩子
         mounted() {
             //钩子函数 链式编程 ES6新特性  已安装
 
             // 1.第一步，获取后台数据，这里是使用json来存值
-            // 也就是获得json里面的数据,然后想办法渲染到前端就ok了
+            // 也就是获得json里面的数据,然后想办法渲染到前端就ok了     这个data.json也可以是一个接口地址
             axios.get("data.json").then(response => (this.info = response.data));
         }
     });

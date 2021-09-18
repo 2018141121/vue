@@ -16,6 +16,12 @@
             <h1>{{ term.message }} 他的id为：{{ term.id }}+他的年龄为：{{ term.age }}</h1>
             <hr></hr>
         </li>
+        <li v-for="talk1 in talks">
+            <h1>
+                {{ talk1.big }}
+            </h1>
+
+        </li>
     </ul>
 
 
@@ -33,7 +39,12 @@
                     //对象
                     {message: "leslie1测试1", id: 1, age: 18, say: "yes"},
                     {message: "leslie2测试2", id: 2, age: 89, say: "yes"},
+                ],
+                talks: [
+                    {big: "hello", id: 1},
+                    {big: "hi", id: 2},
                 ]
+
             }
         })
     ;
