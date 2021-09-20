@@ -52,3 +52,4 @@ export default {
 <style scoped>
 
 </style>
+unable to access 'https://github.com/2018141121/vue/': OpenSSL SSL_read: Connection was reset, errno 10054
