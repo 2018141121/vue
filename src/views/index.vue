@@ -29,7 +29,10 @@
             <template slot="title"><i class="el-icon-caret-right"></i>内容管理</template>
             <el-menu-item-group>
               <el-menu-item index="2-1">分类管理</el-menu-item>
-              <el-menu-item index="2-2">内容列表</el-menu-item>
+              <el-menu-item index="2-2">
+                <router-link :to="{name:'all'}"> 内容列表</router-link>
+
+              </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
@@ -50,7 +53,10 @@
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item>
+                <router-link :to="{name:'login'}">退出登录</router-link>
+
+              </el-dropdown-item>
 
             </el-dropdown-menu>
           </el-dropdown>
@@ -68,9 +74,12 @@
 </template>
 
 <script>
+
+
 export default {
-  //获得数据
+  //获得name数据
   props: ['name'],
+  //名字为index的组件
   name: "index"
 }
 </script>

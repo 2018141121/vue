@@ -5,10 +5,12 @@
       <h3 class="login-title">欢迎登录</h3>
 
       <el-form-item label="账号" prop="username">
+        <!--        双向绑定了username-->
         <el-input type="text" placeholder="请输入账号" v-model="form.username"/>
       </el-form-item>
 
       <el-form-item label="密码" prop="password">
+        <!--        双向绑定了password-->
         <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
       </el-form-item>
 

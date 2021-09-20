@@ -15,26 +15,26 @@
 <!--通过id绑定一个vue，也就是一个中间件-->
 <div id="app">
 
-    <!--3.第三步，前端调用中间件，然后输出相关的数据    -->
-    <div>{{ info.name }}</div>
-    <!--    <span>{{info.}}</span>-->
+    <!--    &lt;!&ndash;3.第三步，前端调用中间件，然后输出相关的数据    &ndash;&gt;-->
+    <!--    <div>{{ info.name }}</div>-->
+    <!--    &lt;!&ndash;    <span>{{info.}}</span>&ndash;&gt;-->
 
-    <a v-bind:href="info.url">点我到百度链接</a>
-    <br>
-   <div >
-       {{info.url}}
-   </div>
-    <div>{{ info.title1 }}</div>
-    <ul>
-        <li v-for="link in info.links"> 名称：{{ link.name }}
-            <a v-bind:href="link.url">跳转地址</a>
-        </li>
-    </ul>
-    <p>输出json里面存的对象</p>
-    <p>名字：{{ info.address.street }}</p>
-    <p>城市：{{ info.address.city }}</p>
-    <p>地点：{{ info.address.country }}</p>
-
+    <!--    <a v-bind:href="info.url">点我到百度链接</a>-->
+    <!--    <br>-->
+    <!--   <div >-->
+    <!--       {{info.url}}-->
+    <!--   </div>-->
+    <!--    <div>{{ info.title1 }}</div>-->
+    <!--    <ul>-->
+    <!--        <li v-for="link in info.links"> 名称：{{ link.name }}-->
+    <!--            <a v-bind:href="link.url">跳转地址</a>-->
+    <!--        </li>-->
+    <!--    </ul>-->
+    <!--    <p>输出json里面存的对象</p>-->
+    <!--    <p>名字：{{ info.address.street }}</p>-->
+    <!--    <p>城市：{{ info.address.city }}</p>-->
+    <!--    <p>地点：{{ info.address.country }}</p>-->
+    <P>{{ info }}</P>
 </div>
 
 <script>
@@ -72,7 +72,8 @@
 
             // 1.第一步，获取后台数据，这里是使用json来存值
             // 也就是获得json里面的数据,然后想办法渲染到前端就ok了     这个data.json也可以是一个接口地址
-            axios.get("data.json").then(response => (this.info = response.data));
+            // axios.get("data.json").then(response => (this.info = response.data));
+            axios.get('http://localhost:8080/hello').then(response => (this.info = response.data));
         }
     });
 </script>
